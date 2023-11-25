@@ -1,48 +1,57 @@
 import React from 'react';
-import { Text, Image, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, ScrollView, Image, StyleSheet, Dimensions } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
 
-type PlaceViewProps = {
+type Props = {
   route: RouteProp<RootStackParamList, 'PlaceView'>;
 };
 
-const PlaceView: React.FC<PlaceViewProps> = ({ route }) => {
+const PlaceView: React.FC<Props> = ({ route }) => {
   const { place } = route.params;
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.title}>{place.name}</Text>
-      <Text style={styles.description}>{place.description}</Text>
-
-      {/* Display images */}
-      {place.imagePaths.map((path, index) => (
-        <Image key={index} source={{ uri: path }} style={styles.image} />
-      ))}
+      <View>
+        <ScrollView horizontal pagingEnabled>
+          {place && place.images && place.images.map((image: string, index: number) => (
+            <Image key={index} source={{ uri: image }} style={styles.image} />
+          ))}
+        </ScrollView>
+      </View>
+      <View style={styles.content}>
+        <Text style={styles.title}>{place.title}</Text>
+        <Text style={styles.description}>{place.description}</Text>
+      </View>
     </ScrollView>
   );
 };
 
+const windowWidth = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+  },
+  content: {
+    marginTop: 10,
+    paddingHorizontal: 20,
+    paddingBottom: 20,
+  },
+  image: {
+    width: windowWidth,
+    height: 200,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 8,
+    textAlign: 'center',
+    marginBottom: 10,
     color: "black",
   },
   description: {
     fontSize: 16,
-    marginBottom: 16,
+    textAlign: 'center',
     color: "black",
-  },
-  image: {
-    width: '100%',
-    height: 200,
-    resizeMode: 'cover',
-    marginBottom: 8,
   },
 });
 

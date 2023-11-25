@@ -1,19 +1,17 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import { View, StyleSheet, Text, Image, FlatList, Dimensions, TouchableOpacity } from "react-native";
 import { StackNavigationProp } from '@react-navigation/stack';
 
 type Props = {
-  navigation: StackNavigationProp<any, 'AddPlace'>;
+  navigation: StackNavigationProp<any, 'ListView'>;
 };
 
-const MapScreen: React.FC<Props> = ({ navigation }) => {
+const ListView: React.FC<Props> = ({ navigation }) => {
 
-  const touristSpots: PlaceDetail[] = [
+  const touristSpots: Place[] = [
     {
       id: 1,
       title: "TCS Powai",
-      coordinates: { latitude: 19.1197, longitude: 72.9051 },
       description: `Embrace the cliche and opt for a horse and carriage ride departing from the Gateway at dusk - it's a lovely time to tour the city.
       
       Created to mark the illustrious visit of King George V and Queen Mary in 1911, the Gateway of India was not completed until 1948, two years before India's independence from England. Instead, the British royals landed on Indian soil to find a cardboard cutout fashioned to show the intended finished product.
@@ -34,7 +32,6 @@ const MapScreen: React.FC<Props> = ({ navigation }) => {
     {
       id: 2,
       title: "Gateway of India",
-      coordinates: { latitude: 18.9217, longitude: 72.8347 },
       description: `Embrace the cliche and opt for a horse and carriage ride departing from the Gateway at dusk - it's a lovely time to tour the city.
       
       Created to mark the illustrious visit of King George V and Queen Mary in 1911, the Gateway of India was not completed until 1948, two years before India's independence from England. Instead, the British royals landed on Indian soil to find a cardboard cutout fashioned to show the intended finished product.
@@ -50,40 +47,56 @@ const MapScreen: React.FC<Props> = ({ navigation }) => {
     },
   ];
 
+  const Card = ({ item }: { item: Place }) => (
+    <TouchableOpacity key={item.id} style={styles.card}
+      onPress={() => navigation.navigate('PlaceView', { place: item })}
+    >
+      <Image source={{ uri: item.images[0] || "" }} style={styles.image} />
+      <Text style={styles.title}>{item.title}</Text>
+      <Text style={styles.description}>{`${item.description.slice(0, 120)}...`}</Text>
+    </TouchableOpacity>
+  );
+
   return (
     <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={{
-          latitude: 18.9389,
-          longitude: 72.8258,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-
-      >
-        {touristSpots.map((spot) => (
-          <Marker
-            key={spot.id}
-            coordinate={spot.coordinates}
-            title={spot.title}
-            onPress={() => {
-              navigation.navigate("SpotDetail", { spot });
-            }}
-          />
-        ))}
-      </MapView>
-    </View>
+      <FlatList data={touristSpots} renderItem={Card} />
+    </View >
   );
 };
+
+const windowWidth = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  map: {
-    flex: 1,
+  image: {
+    width: windowWidth - 20,
+    height: 200,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
   },
+  title: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: "black",
+  },
+  description: {
+    fontSize: 12,
+    color: "gray",
+  },
+  card: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 10,
+    marginBottom: 10,
+    borderRadius: 8,
+    borderColor: "#ccc",
+    borderWidth: .5,
+    marginHorizontal: 10,
+    paddingBottom: 10,
+  }
 });
 
-export default MapScreen;
+export default ListView;
