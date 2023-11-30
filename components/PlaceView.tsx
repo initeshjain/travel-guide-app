@@ -10,11 +10,12 @@ const PlaceView: React.FC<Props> = ({ route }) => {
   const { place } = route.params;
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}>
       <View>
         <ScrollView horizontal pagingEnabled>
-          {place && place.images && place.images.map((image: string, index: number) => (
-            <Image key={index} source={{ uri: image }} style={styles.image} />
+          {place && place.images && place.images.map((image: any, index: number) => (
+            <Image key={index} source={image || ""} style={styles.image} />
           ))}
         </ScrollView>
       </View>
