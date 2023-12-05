@@ -1,6 +1,7 @@
 type RootStackParamList = {
   ListView: { places: Spot[] };
   PlaceView: { place: Spot };
+  SearchView: undefined;
 };
 
 type RootTopTabParamList = {

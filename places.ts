@@ -1,4 +1,4 @@
-import { GatwayOfIndia1, TajHotel1, TajHotel2, TajHotel3, RoyalBombayYatchClub1, RoyalBombayYatchClub2, DhanrajMahal1, DhanrajMahal2, NavalDockYard1, NavalDockYard2, AsiaticLibrary1, AsiaticLibrary2, ReserveBankOfIndia1, ReserveBankOfIndia2, MazagaonDock1, MazagaonDock2, RashtriyaChemicals1, RashtriyaChemicals2, TCSCampus1, TCSCampus2, TCSBanyan1, BandraWorliSeaLink1, BandraWorliSeaLink2, HajiAliDargah1, HajiAliDargah2, Antila1, Antila2, MarinDrive1, MarinDrive2, ArtDeco1, ArtDeco2, TajHotel4, TajHotel5, TajHotel6 } from "./components/images"
+import { GatwayOfIndia1, TajHotel1, TajHotel2, TajHotel3, RoyalBombayYatchClub1, RoyalBombayYatchClub2, DhanrajMahal1, DhanrajMahal2, NavalDockYard1, NavalDockYard2, AsiaticLibrary1, AsiaticLibrary2, ReserveBankOfIndia1, ReserveBankOfIndia2, MazagaonDock1, MazagaonDock2, RashtriyaChemicals1, RashtriyaChemicals2, TCSCampus1, TCSCampus2, TCSBanyan1, BandraWorliSeaLink1, BandraWorliSeaLink2, HajiAliDargah1, HajiAliDargah2, Antila1, Antila2, MarinDrive1, MarinDrive2, ArtDeco1, ArtDeco2, TajHotel4, TajHotel5, TajHotel6 } from "./app/images"
 
 export const highlightedPlaces: Spot[] = [
   {
